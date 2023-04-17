@@ -1,20 +1,71 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+<ion-menu contentId="main-content">
+  <ion-header>
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title>Menu Content</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-content class="ion-padding">This is the menu content.</ion-content>
+</ion-menu>
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="3">
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
-</ion-content>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-menu-button>
+              <ion-button color="primary" fill="clear"><ion-icon slot="start" name="menu"></ion-icon>MENU</ion-button>
+
+            </ion-menu-button>
+            <ion-button color="primary" fill="outline"> <ion-icon slot="start" name="close-circle-outline"></ion-icon>
+              FORCE
+              CLOSE</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-col>
+
+      <ion-col class="tabs-panel">
+        <ion-button class="btn" [class.btn-selected]="selectedTab == 'new-orders'" (click)="selectTab('new-orders')"
+          color="light"> <ion-icon color="primary" slot="start"
+            [name]="selectedTab == 'new-orders' ? 'document-text' : 'document-text-outline'"></ion-icon>NEW ORDERS
+        </ion-button>
+        <ion-button [class.btn-selected]="selectedTab == 'in-progress'" (click)="selectTab('in-progress')"
+          color="light"> <ion-icon color="primary" slot="start"
+            [name]="selectedTab == 'in-progress' ? 'bag' : 'bag-outline'"></ion-icon>
+          IN PROGRESS</ion-button>
+        <ion-button [class.btn-selected]="selectedTab == 'history'" (click)="selectTab('history')" color="light">
+          <ion-icon color="primary" slot="start"
+            [name]="selectedTab == 'history' ? 'timer' : 'timer-outline'"></ion-icon> HISTORY</ion-button>
+
+      </ion-col>
+      <ion-col class="ion-float-right" size="3">
+        <ion-button>SHOP</ion-button>
+
+      </ion-col>
+    </ion-row>
+  </ion-header>
+  <ion-content class="ion-padding">
+
+
+    <ion-card class="ion-padding" *ngIf="selectedTab == 'new-orders'">
+
+      <ion-title>
+        NEW ORDERS
+      </ion-title>
+    </ion-card>
+
+    <ion-card class="ion-padding" *ngIf="selectedTab == 'in-progress'">
+
+      <ion-title>
+        IN PROGRESS
+      </ion-title>
+    </ion-card>
+
+    <ion-card class="ion-padding" *ngIf="selectedTab == 'history'">
+
+      <ion-title>
+        HISTORY
+      </ion-title>
+    </ion-card>
+  </ion-content>
+</div>
