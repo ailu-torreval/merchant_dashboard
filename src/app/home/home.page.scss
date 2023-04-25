@@ -28,4 +28,9 @@ ion-menu-button {
         --border-style: solid;
     }
 
+    ion-card-header {
+        border-bottom: 2px solid var(--ion-color-primary);
+        margin-inline: 1rem;
+    }
+
 }
