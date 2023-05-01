@@ -4,7 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import ordersData from '../../assets/ordersData.json';
 import merchantData from '../../assets/merchantData.json'
 import { ComponentsModule } from 'src/app/components/components.module';
-import { OrderSortingService } from '../services/order-sorting.service';
+import { OrderManagementService } from '../services/order-management.service';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +20,7 @@ export class HomePage implements OnInit {
   showCustomerData: boolean = false;
   displayOptions: boolean = false;
 
-  constructor(public orders: OrderSortingService) {}
+  constructor(public orders: OrderManagementService) {}
 
 
   ngOnInit(): void {
@@ -32,9 +32,9 @@ export class HomePage implements OnInit {
 
 
     //open page on new orders in case there is a new one
-    // if (orders..newOrders.length > 0) {
-    //   this.selectedTab = 'new-orders'
-    // }
+    if (this.orders.newOrders.length > 0) {
+      this.selectedTab = 'new-orders'
+    }
 
 
   }

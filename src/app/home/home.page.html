@@ -128,58 +128,25 @@
     </div>
 
 
-
     <ion-accordion-group *ngIf="selectedTab == 'in-progress'">
-      <ion-accordion value="first">
+      <ion-accordion *ngFor="let order of orders.inProgress">
         <ion-item slot="header" color="warning">
-          <ion-label>First Accordion</ion-label>
+          <ion-label>{{order.userName}}</ion-label>
         </ion-item>
         <div class="ion-padding" slot="content">
-          First Content
-        </div>
-      </ion-accordion>
-      <ion-accordion value="second">
-        <ion-item slot="header" color="warning">
-          <ion-label>Second Accordion</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          Second Content
-        </div>
-      </ion-accordion>
-      <ion-accordion value="third">
-        <ion-item slot="header" color="warning">
-          <ion-label>Third Accordion</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          Third Content
+          {{order.userAddress1}}
         </div>
       </ion-accordion>
     </ion-accordion-group>
 
 
     <ion-accordion-group *ngIf="selectedTab == 'history'">
-      <ion-accordion value="first">
+      <ion-accordion *ngFor="let order of orders.history" >
         <ion-item slot="header" color="warning">
-          <ion-label>First Accordion</ion-label>
+          <ion-label>{{order.userName}}</ion-label>
         </ion-item>
         <div class="ion-padding" slot="content">
-          First Content
-        </div>
-      </ion-accordion>
-      <ion-accordion value="second">
-        <ion-item slot="header" color="warning">
-          <ion-label>Second Accordion</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          Second Content
-        </div>
-      </ion-accordion>
-      <ion-accordion value="third">
-        <ion-item slot="header" color="warning">
-          <ion-label>Third Accordion</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          Third Content
+          {{order.userAddress1}}
         </div>
       </ion-accordion>
     </ion-accordion-group>
