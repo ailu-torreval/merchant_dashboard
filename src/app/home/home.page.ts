@@ -1,10 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, PopoverController } from '@ionic/angular';
 import ordersData from '../../assets/ordersData.json';
 import merchantData from '../../assets/merchantData.json'
 import { ComponentsModule } from 'src/app/components/components.module';
 import { OrderManagementService } from '../services/order-management.service';
+import { NewOrderpopoverComponent } from '../components/new-orderpopover/new-orderpopover.component';
+import { log } from 'console';
+import { CustomerDetailsComponent } from '../components/customer-details/customer-details.component';
+import { Http } from '../services/Http';
 
 @Component({
   selector: 'app-home',
@@ -16,19 +20,21 @@ import { OrderManagementService } from '../services/order-management.service';
 export class HomePage implements OnInit {
   selectedTab: any;
   emptyDash: boolean = true;
-  //for neworders component
-  showCustomerData: boolean = false;
-  displayOptions: boolean = false;
-
-  constructor(public orders: OrderManagementService) {}
 
 
-  ngOnInit(): void {
+  // constructor(public orders: OrderManagementService, private popoverCtrl: PopoverController) {}
+  constructor(public orders: OrderManagementService, private popoverCtrl: PopoverController, private http: Http) {}
+
+
+  async ngOnInit(){
     //start from empty dash
     // this.selectedTab = 'empty';
 
     // check if the restaurant is open or closed
 
+    const user: any = await this.http.request('user/10');
+    console.log("USER WORKS?", user);
+    
 
 
     //open page on new orders in case there is a new one
@@ -49,12 +55,36 @@ export class HomePage implements OnInit {
     //get into merchant data, change the forcedClose boolean to true
   }
 
-  //this functions are for new order component
-  displayCustomerData() {
-    this.showCustomerData === true ? this.showCustomerData = false : this.showCustomerData = true;
+  async openPopover(id:string, e:Event) {
+
+    const popover = await this.popoverCtrl.create({
+      component:     NewOrderpopoverComponent,
+      event: e,
+      componentProps: {orderId: id}
+  });
+    console.log("id is", id);
+
+   await popover.present() ;
+    
   }
 
-  showOptions() {
-    this.displayOptions = true;
+  proceedOrder(id:number) {
+    console.log("proceed order", id);
+    //change order status
   }
+
+  async openCustomerPopover() {
+    //open popover
+    // CustomerDetailsComponent
+
+    const popover = await this.popoverCtrl.create({
+      component:     CustomerDetailsComponent,
+      // event: e,
+      // componentProps: {orderId: id}
+  });
+
+   await popover.present() ;
+  }
+
+
 }

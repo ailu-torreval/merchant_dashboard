@@ -1,0 +1,76 @@
+
+<ion-popover>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-row>
+        <ion-col size="1">
+          <ion-button (click)="displayCustomerData()" fill="clear">
+            <ion-icon slot="icon-only" size="large" color="primary" name="information-circle-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col size="6">
+  
+          <ion-card-title>{{orders.newOrders[0].userName}}</ion-card-title>
+          <ion-card-subtitle>#{{orders.newOrders[0].id}}
+          </ion-card-subtitle>
+          <img *ngIf="orders.newOrders[0].isDelivered" src="../../assets/delivery.png" alt="delivery icon" height="30">
+          <img *ngIf="!orders.newOrders[0].isDelivered" src="../../assets/take-away-outline.png" height="30">
+  
+        </ion-col>
+        <ion-col size="4">
+          <ion-text class="ion-float-right" >Estimated Time: {{orders.newOrders[0].pickUpTime}} min.</ion-text>
+  
+        </ion-col>
+      </ion-row>
+  
+      <ion-row *ngIf="showCustomerData">
+        <ion-col size="5">
+          <div *ngIf="orders.newOrders[0].isDelivered">
+  
+              <ion-text>
+                <span>
+                  <img src="../../assets/delivery.png" alt="delivery icon" height="30">
+                </span> Delivery
+              </ion-text>
+              <ion-text>{{orders.newOrders[0].userAddress1}} {{orders.newOrders[0].userAddress2}} - {{orders.newOrders[0].userZip}} - {{orders.newOrders[0].userCity}}</ion-text>
+  
+          </div>
+  
+          <div *ngIf="!orders.newOrders[0].isDelivered">
+  
+              <ion-text>
+                <span>
+                  <img src="../../assets/take-away-outline.png" alt="pickup icon" height="30">
+                </span> Delivery
+              </ion-text>
+            </div>
+  
+        </ion-col>
+  
+        <ion-col size="5">
+          <ion-text>Customer Contact</ion-text>
+          <!-- <ion-text>{{orders.newOrders[0].userPhone}}</ion-text> THIS IS COMMENT -->
+        </ion-col>
+  
+  
+      </ion-row>
+  
+    </ion-card-header>
+  
+    <ion-card-content>
+      Here's a small text description for the card content. Nothing more, nothing less.
+    </ion-card-content>
+    <ion-row *ngIf="displayOptions">
+      <ion-button fill="outline">DELAY 10 MIN.</ion-button> 
+      <ion-button fill="outline">ESTABLISH DELAY</ion-button> 
+      <ion-button color="secondary">decline ORDER</ion-button>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-button (click)="showOptions()" fill="outline">OPTIONS</ion-button> <ion-button>CONFIRM ORDER</ion-button>
+    </ion-row>
+  </ion-card>
+
+</ion-popover>
+
+
