@@ -56,12 +56,36 @@
     </ion-card-header>
   
     <ion-card-content>
+      <!-- order -->
+      <ion-col *ngFor="let orderProd of order.orderProducts" class="content ion-align-items-stretch" size="7">
+        <ion-row class="first-line">
+          <ion-text> <span>{{orderProd.quantity}} x </span> {{orderProd.title}}</ion-text>
+        </ion-row>
+  
+        <ng-container *ngIf="orderProd.lister.length >= 1">
+          <ion-row class="liste" *ngFor="let liste of orderProd.lister">
+            <ion-text>
+              <span class="title">
+                {{liste.title}}:
+              </span>
+              <span *ngIf="liste.isRadio">{{liste.selection.name}};</span> <span *ngIf="!liste.isRadio"> <span
+                  *ngFor="let selection of liste.selection; let i= index;"><span>{{selection.name}} </span> <span
+                    *ngIf="i < liste.selection.length -1">, </span> </span> </span>
+            </ion-text>
+          </ion-row>
+        </ng-container>
+        <ion-row class="msg" *ngIf="orderProd.message">"{{orderProd.message}}"</ion-row>
+  
+        <ion-row class="last-row">
+          <ion-text>{{orderProd.total}}kr.</ion-text>
+        </ion-row>
+      </ion-col>
       Here's a small text description for the card content. Nothing more, nothing less.
     </ion-card-content>
     <ion-row *ngIf="displayOptions">
       <ion-button fill="outline">DELAY 10 MIN.</ion-button> 
       <ion-button fill="outline">ESTABLISH DELAY</ion-button> 
-      <ion-button color="secondary">decline ORDER</ion-button>
+      <ion-button color="secondary" (click)="orders.changeOrderStatus(order.id, order.orderStatus, 4, false)" >decline ORDER</ion-button>
     </ion-row>
     <ion-row class="ion-justify-content-center">
       <ion-button (click)="showOptions()" fill="outline">OPTIONS</ion-button> <ion-button (click)="orders.changeOrderStatus(order.id, order.orderStatus, 1, false)" >CONFIRM ORDER</ion-button>
