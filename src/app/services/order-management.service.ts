@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import ordersData from '../../assets/ordersData.json';
+import { Http } from './Http';
 
 
 @Injectable({
@@ -11,10 +12,11 @@ export class OrderManagementService {
   newOrders: any = [];
   inProgress: any = [];
   history: any = [];
+  orderObj: any;
 
 
 
-constructor() { 
+constructor(private http: Http) { 
 
 
   }
@@ -31,8 +33,19 @@ constructor() {
    }
  }
 
-  changeOrderStatus(orderId: number, oldStatus: number, newStatus: number, addDelay:boolean, newTime?:string) {
-    console.log("ORDER ACCEPTED", orderId, oldStatus, newStatus, addDelay);
+  async changeOrderStatus(orderId: number, oldStatus: number, newStatus: number, addDelay:boolean, newTime?:string) {
+    if(newStatus == 1)
+    //change status
+    this.orderObj = this.newOrders.filter((ord:any)=> ord.id === orderId);
+    this.orderObj[0].orderStatus = newStatus;
+    const str: string = `order/${orderId}` 
+    const obj: any = await this.http.request(str, 'PUT', this.orderObj[0]);
+    console.log("intento de put request", obj);
+    //change array that belongs --- should i map again the whole object or jsut move it from array?
+    //moving it to another array
+    
+    
+
     
     // change orderStatus to the correct one
     //add delay if needed, change preparation time and estimated delivery
