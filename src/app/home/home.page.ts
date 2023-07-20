@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { IonicModule, PopoverController } from '@ionic/angular';
+import { IonicModule, ModalController, PopoverController } from '@ionic/angular';
 import ordersData from '../../assets/ordersData.json';
 import merchantData from '../../assets/merchantData.json'
 import { ComponentsModule } from 'src/app/components/components.module';
@@ -23,17 +23,19 @@ export class HomePage implements OnInit {
 
 
   // constructor(public orders: OrderManagementService, private popoverCtrl: PopoverController) {}
-  constructor(public orders: OrderManagementService, private popoverCtrl: PopoverController, private http: Http) {}
+  constructor(public orders: OrderManagementService, private popoverCtrl: PopoverController, private modalCtrl: ModalController, private http: Http) {}
 
 
+  //MERCHANT ID = 24
   async ngOnInit(){
     //start from empty dash
     // this.selectedTab = 'empty';
 
     // check if the restaurant is open or closed
 
-    const user: any = await this.http.request('user/10');
-    console.log("USER WORKS?", user);
+    this.orders.ordersData =   await this.http.request('allMerchantOrders/24');
+    this.orders.manageOrders()
+
     
 
 
@@ -55,17 +57,29 @@ export class HomePage implements OnInit {
     //get into merchant data, change the forcedClose boolean to true
   }
 
-  async openPopover(id:string, e:Event) {
+  // async openPopover(id:string, e:Event) {
 
-    const popover = await this.popoverCtrl.create({
-      component:     NewOrderpopoverComponent,
-      event: e,
-      componentProps: {orderId: id}
-  });
-    console.log("id is", id);
+  //   const popover = await this.popoverCtrl.create({
+  //     component:     NewOrderpopoverComponent,
+  //     event: e,
+  //     componentProps: {orderId: id}
+  // });
+  //   console.log("id is", id);
 
-   await popover.present() ;
+  //  await popover.present() ;
     
+  // }
+
+  async openPopover(order:any, e:Event) {
+
+    const modal = await this.modalCtrl.create({
+      component:  NewOrderpopoverComponent,
+      componentProps: {order: order},
+      breakpoints: [0.95],
+      initialBreakpoint: 0.85,
+      handle: false,
+    });
+    await modal.present();
   }
 
   proceedOrder(id:number) {

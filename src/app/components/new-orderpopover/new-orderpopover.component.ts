@@ -8,6 +8,7 @@ import { PopoverController } from '@ionic/angular';
   styleUrls: ['./new-orderpopover.component.scss'],
 })
 export class NewOrderpopoverComponent  implements OnInit {
+  order:any;
 
   showCustomerData: boolean = false;
   displayOptions: boolean = false;
@@ -15,7 +16,7 @@ export class NewOrderpopoverComponent  implements OnInit {
   constructor(public orders: OrderManagementService) { }
 
   ngOnInit() {
-    console.log();
+    console.log("OPEN POPOVER", this.order);
     
   }
 

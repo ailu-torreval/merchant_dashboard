@@ -55,7 +55,7 @@
 
     <div class="ion-padding" *ngIf="selectedTab == 'new-orders'" class="dashboard-padding">
 
-      <ion-item *ngFor="let order of orders.newOrders" (click)="openPopover(order.id, $event)" button detail="true">
+      <ion-item *ngFor="let order of orders.newOrders" (click)="openPopover(order, $event)" button detail="true">
         <ion-label>
           <ion-text color="primary">#{{order.id}} </ion-text>
           <ion-text class="ion-text-capitalize">{{order.userName}}</ion-text></ion-label>
