@@ -85,9 +85,9 @@
     <ion-row *ngIf="displayOptions">
       <ion-button fill="outline">DELAY 10 MIN.</ion-button> 
       <ion-button fill="outline">ESTABLISH DELAY</ion-button> 
-      <ion-button color="secondary" (click)="orders.changeOrderStatus(order.id, order.orderStatus, 4, false)" >decline ORDER</ion-button>
+      <ion-button color="secondary" (click)="manageOrder(order.id, order.orderStatus, 4, false)" >decline ORDER</ion-button>
     </ion-row>
     <ion-row class="ion-justify-content-center">
-      <ion-button (click)="showOptions()" fill="outline">OPTIONS</ion-button> <ion-button (click)="orders.changeOrderStatus(order.id, order.orderStatus, 1, false)" >CONFIRM ORDER</ion-button>
+      <ion-button (click)="showOptions()" fill="outline">OPTIONS</ion-button> <ion-button (click)="manageOrder(order.id, order.orderStatus, 1, false)" >CONFIRM ORDER</ion-button>
     </ion-row>
  </ion-content>

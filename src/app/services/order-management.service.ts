@@ -40,11 +40,9 @@ constructor(private http: Http) {
     this.orderObj[0].orderStatus = newStatus;
     const str: string = `order/${orderId}` 
     const obj: any = await this.http.request(str, 'PUT', this.orderObj[0]);
-    console.log("intento de put request", obj);
     //change array that belongs --- should i map again the whole object or jsut move it from array?
     //moving it to another array
-    
-    
+
 
     
     // change orderStatus to the correct one
