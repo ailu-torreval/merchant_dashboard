@@ -63,7 +63,15 @@ export class Sockets implements OnInit {
 
                 
             });
+            this.userSocket?.fromEvent('order-data').subscribe(async (data:any) => {
+                console.log('RECEIVED-SOCKET:', data.order);
+                console.log('RECEIVED-SOCKET:', data);
+            });
         });
+    }
+
+    sendOrderToUser(userId:string, status:number) {
+        this.userSocket?.emit('send-order-status', {userId: userId, status:status});
     }
 
 
