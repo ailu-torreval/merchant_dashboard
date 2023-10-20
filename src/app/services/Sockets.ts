@@ -61,6 +61,7 @@ export class Sockets implements OnInit {
 
                 console.log('RECEIVED-SOCKET:', data);
 
+                // i have to change all this
                 
             });
             this.userSocket?.fromEvent('order-data').subscribe(async (data:any) => {
